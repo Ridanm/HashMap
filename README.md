@@ -1,14 +1,15 @@
-### HashMap
+# Hash Map
 
-#### A hash map is a data structure that stores key-value pairs. 
+### A hash map (or hash table) is a data structure that stores key-value pairs, allowing efficient search, insertion, and deletion. It uses a hash function to convert each key into an index within an array, where the corresponding value is stored.
 
-#### It is used to perform fast data lookup, insertion, and deletion operations.
+## Characteristics:
 
-#### Uses a hash function to convert the keys into an index (hash code) of the array.
+### Fast access: Basic operations (search, insertion, and deletion) have an average complexity of O(1).
 
-#### El objetivo es distribuir las claves de manera uniforme en toda la matriz, minimizando las colisiones. 
+### Collisions: These occur when two different keys generate the same hash index. They are handled with techniques such as chaining (linked lists) or open addressing (linear probing, quadratic probing, etc.).
 
-#### Hashing is the process of transforming a given key or string of characters into another value. 
-#### The result is usually a shorter, fixed-length value, which makes it computationally easier to work with than the original key.
+### Unordered: Elements are not stored in a specific order.
 
-#### Project: https://www.theodinproject.com/lessons/ruby-hashmap
+### Common use: Used in databases, caches, indexing systems, and counting algorithms.
+
+### Based on the steps from of the Odin Project: https://www.theodinproject.com/lessons/ruby-hashmap
