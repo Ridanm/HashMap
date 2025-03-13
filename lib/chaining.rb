@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # We implemented where to store the hash map data with Linked list class and node class
-module DataStructure
+module NodeLinkedList
   # Node class
   class Node
     attr_accessor :value, :next_node
