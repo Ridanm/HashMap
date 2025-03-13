@@ -1,3 +1,7 @@
 spec
 utils
 .rspec
+lib/.data_structure_module.rb.swp
+lib/.hash_map.rb.swp
+lib/.main.rb.swp
+.gitignore.swp
