@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require 'pry'
+require 'pry-byebug'
 require_relative 'chaining'
+require 'pry'
 
 # This class implements a hash table
 class HashMap
@@ -68,17 +69,19 @@ class HashMap
   def remove(key)
     index = hash(key)
     return if @buckets[index].nil?
-
-    key_deleted = nil
+binding.pry
+    key_removed = nil
     current = @buckets[index].head
-    while !current.nil?
-      key_deleted = current.value if current.next_node.value.first == key
 
+    until current.nil?
+    return key_deleted = current.value.first if current.next_node.nil?
+
+    key_removed = current.next_node.value.first if current.value.first == key
       current = current.next_node
-      binding.pry
     end
-    @buckets[index].next_node = current
-    key_deleted
+    @buckets[index] = current
+    key_removed
+   # binding.pry
   end
 
   def length
@@ -93,6 +96,7 @@ class HashMap
       end
     end
     key_count
+    puts 'returmmmmmmmm'
   end
 
   def clear
