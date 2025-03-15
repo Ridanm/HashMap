@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+#require 'pry-byebug'
 # This class implements a hash table
 class HashMap
   include NodeLinkedList
+  include Enumerable
 
   attr_reader :capacity, :load_factor, :buckets
 
@@ -125,5 +127,16 @@ class HashMap
     existing_values
   end
 
-  def entries; end
+  def entries
+    key_value = []
+    active_lists.each do |list|
+      current = list.head
+      while current
+        key_value << current.value
+        current = current.next_node
+      end
+    end
+
+    key_value
+  end
 end
