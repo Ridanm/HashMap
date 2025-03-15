@@ -27,17 +27,5 @@ module NodeLinkedList
       current = current.next_node until current.next_node.nil?
       current.next_node = Node.new(data)
     end
-
-    def contains?(value)
-      return false if head.nil?
-
-      current = @head
-      while current
-        return true if current.data == value
-
-        current = current.next_node
-      end
-      false
-    end
   end
 end
