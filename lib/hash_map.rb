@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
-require_relative 'chaining'
-require 'pry'
-
 # This class implements a hash table
 class HashMap
   include NodeLinkedList
@@ -67,21 +63,20 @@ class HashMap
   end
 
   def remove(key)
-    index = hash(key)
-    return if @buckets[index].nil?
-binding.pry
+    return if @buckets[hash(key)].nil?
+
     key_removed = nil
-    current = @buckets[index].head
+    current = @buckets[hash(key)].head
 
     until current.nil?
-    return key_deleted = current.value.first if current.next_node.nil?
+      return key_removed = current.value.first if current.next_node.nil?
 
-    key_removed = current.next_node.value.first if current.value.first == key
+      key_removed = current.next_node.value.first if current.value.first == key
       current = current.next_node
     end
-    @buckets[index] = current
+
+    @buckets[hash(key)] = current
     key_removed
-   # binding.pry
   end
 
   def length
@@ -96,7 +91,6 @@ binding.pry
       end
     end
     key_count
-    puts 'returmmmmmmmm'
   end
 
   def clear
