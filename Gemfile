@@ -3,4 +3,4 @@
 source 'https://rubygems.org'
 
 gem 'rspec', '~> 3.13'
-gem 'pry', '~> 0.15.1'
+gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
