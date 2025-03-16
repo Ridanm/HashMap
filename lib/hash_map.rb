@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'complementary_methods'
-
 # This class implements a hash table
 class HashMap
   include UpdateData
@@ -15,11 +13,6 @@ class HashMap
     @buckets = []
   end
 
-  def index_error(bucket_index)
-    raise IndexError if bucket_index.negative? || bucket_index >= @capacity
-  end
-
-  # start of hash_map class methods
   def hash(key)
     hash_code = 0
     prime = 31
@@ -68,7 +61,7 @@ class HashMap
 
     until current.nil?
       return key_removed = current.value.first if current.next_node.nil?
-
+      
       key_removed = current.next_node.value.first if current.value.first == key
       current = current.next_node
     end
