@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-#require 'pry-byebug'
+require_relative 'complementary_methods'
+
 # This class implements a hash table
 class HashMap
+  include UpdateData
   include NodeLinkedList
-  include Enumerable
 
   attr_reader :capacity, :load_factor, :buckets
 
@@ -18,32 +19,28 @@ class HashMap
     raise IndexError if bucket_index.negative? || bucket_index >= @capacity
   end
 
-  def update_values!(index, data); end
-
-  def active_lists
-    @buckets.compact
-  end
-
   # start of hash_map class methods
   def hash(key)
     hash_code = 0
     prime = 31
     key.to_s.each_char { |char| hash_code = prime * hash_code + char.ord }
-    bucket = hash_code % @capacity
+    bucket = (hash_code % @capacity)
     bucket.to_i
   end
 
   def set(key, value)
-    index = hash(key)
-    @buckets[index] = LinkedList.new if @buckets[index].nil?
-    @buckets[index].append([key, value])
+    @buckets[hash(key)] = LinkedList.new if @buckets[hash(key)].nil?
+    if has?(key)
+      update_key!(key, value)
+    else
+      @buckets[hash(key)].append([key, value])
+    end
   end
 
   def get(key)
-    index = hash(key)
-    return if @buckets[index].nil?
+    return if @buckets[hash(key)].nil?
 
-    current = @buckets[index].head
+    current = @buckets[hash(key)].head
     while current
       return current.value.last if current.value.first == key
 
@@ -52,10 +49,9 @@ class HashMap
   end
 
   def has?(key)
-    index = hash(key)
-    return false if @buckets[index].nil?
+    return false if @buckets[hash(key)].nil?
 
-    current = @buckets[index].head
+    current = @buckets[hash(key)].head
     while current
       return true if current.value[0] == key
 
