@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'chaining'
+require_relative 'complementary_methods'
 require_relative 'hash_map'
 
 hash_map = HashMap.new
@@ -40,3 +41,4 @@ p hash_map.entries
 # p hash_map.has?('Rosa')
 # p hash_map.has?('Kira')
 # p hash_map.has?('Daniel')
+
