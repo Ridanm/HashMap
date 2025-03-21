@@ -7,12 +7,6 @@ module UpdateData
     raise IndexError if bucket_index.negative? || bucket_index >= @capacity
   end
 
-  def check_object(object)
-    return unless object.is_a?(Hash)
-
-    p 'Hellloooo' if current.value.last.keys.include?(data.keys)
-  end
-
   def update_key!(key, data)
     current = @buckets[hash(key)].head
     while current
