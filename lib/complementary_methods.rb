@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'pry-byebug'
+
 # This module has methods that interact with the HashMap class
 module UpdateData
   def index_error(bucket_index)
@@ -27,5 +28,24 @@ module UpdateData
 
   def active_lists
     @buckets.compact
+  end
+
+  def growth
+    factor = length.to_f / capacity
+    if factor >= load_factor
+      re_hash
+    end
+    factor
+  end
+
+  def is_empty?
+    length == 0
+  end
+
+  def re_hash
+    old_buckets = buckets
+    new_hash = HashMap.new(capacity *= 2)
+    old_buckets
+  binding.pry
   end
 end
