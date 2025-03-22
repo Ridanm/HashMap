@@ -10,7 +10,7 @@ class HashMap
   def initialize(capacity = 16, load_factor = 0.75)
     @capacity = capacity
     @load_factor = load_factor
-    @buckets = []
+    @buckets = Array.new(capacity)
   end
 
   def hash(key)
@@ -85,7 +85,7 @@ class HashMap
   end
 
   def clear
-    @buckets = []
+    @buckets = Array.new(capacity)
   end
 
   def keys
