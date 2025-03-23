@@ -125,7 +125,7 @@ RSpec.describe HashMap do
   end
 
   context '#entries' do
-    it 'returns an Array containing the [[keys, values],...]' do
+    it 'returns an Array containing the [[keys, values] ,...]' do
       subject.set('banana', 'yellow')
       subject.set('apple', 'red')
       subject.set('bird', 'blue')
