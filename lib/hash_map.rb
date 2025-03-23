@@ -61,7 +61,7 @@ class HashMap
 
     until current.nil?
       return key_removed = current.value.first if current.next_node.nil?
-      
+
       key_removed = current.next_node.value.first if current.value.first == key
       current = current.next_node
     end
