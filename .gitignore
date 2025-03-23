@@ -1,9 +1,10 @@
 utils
 spec/.hash_map_spec.rb.swp
-.rspec
 lib/.data_structure_module.rb.swp
 lib/.hash_map.rb.swp
 lib/.main.rb.swp
 lib/.chaining.rb.swp
-.gitignore.swp
 lib/.complementary_methods.rb.swp
+.rubocop.yalm
+.rspec
+.gitignore.swp
