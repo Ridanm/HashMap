@@ -6,7 +6,7 @@ require './lib/complementary_methods'
 require './lib/hash_map'
 
 RSpec.describe HashMap do
-  subject { HashMap.new }
+  subject { HashMap.new(16, 0.75) }
   let(:linked_list) { NodeLinkedList::LinkedList.new }
 
   context 'When creating an object of the HashMap class' do
@@ -130,6 +130,30 @@ RSpec.describe HashMap do
       subject.set('apple', 'red')
       subject.set('bird', 'blue')
       expect(subject.entries.sort).to eq([['banana', 'yellow'], ['apple', 'red'], ['bird', 'blue']].sort)
+    end
+  end
+
+  context '#growth' do
+    it 'when the load factor reaches 0.75' do
+      h_map = HashMap.new(2, 0.75)
+      h_map.set('cat', 'gray')
+      h_map.set('apple', 'red')
+      expect(h_map.growth).to be(true)
+    end 
+
+    it 'load factor below 0.75' do
+      expect(subject.growth).to be(false)
+    end
+  end
+
+  context '#re_hash' do
+    xit 'Its capacity must be double the current one' do
+      new_hash = subject.re_hash
+      expect(new_hash.buckets.count.nil).to eq(32)
+    end
+
+    xit 'when the load factor reaches its maximum' do
+      expect(subject.buckets.length).to eq(16)
     end
   end
 end
