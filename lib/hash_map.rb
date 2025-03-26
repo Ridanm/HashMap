@@ -13,15 +13,16 @@ class HashMap
     @buckets = Array.new(capacity)
   end
 
-  def hash(key)
+  def hash(key, capacity = @capacity) 
     hash_code = 0
     prime = 31
     key.to_s.each_char { |char| hash_code = prime * hash_code + char.ord }
-    bucket = (hash_code % @capacity)
+    bucket = (hash_code % capacity)
     bucket.to_i
   end
 
   def set(key, value)
+    re_hash if growth
     @buckets[hash(key)] = LinkedList.new if @buckets[hash(key)].nil?
     if has?(key)
       update_key!(key, value)
