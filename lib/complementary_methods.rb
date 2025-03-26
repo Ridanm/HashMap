@@ -32,10 +32,7 @@ module UpdateData
 
   def growth
     factor = length.to_f / capacity
-    if factor >= load_factor
-      re_hash
-    end
-    factor
+    factor >= load_factor
   end
 
   def is_empty?
@@ -43,9 +40,12 @@ module UpdateData
   end
 
   def re_hash
-    old_buckets = buckets
-    new_hash = HashMap.new(capacity *= 2)
-    old_buckets
-  binding.pry
+    return if is_empty?
+
+    new_hash = HashMap.new(capacity * 2)
+    entries.each do | ky, val |
+      new_hash.set(ky, val)
+    end
+    new_hash
   end
 end
