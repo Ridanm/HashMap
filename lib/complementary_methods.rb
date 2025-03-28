@@ -35,15 +35,15 @@ module UpdateData
     factor >= load_factor
   end
 
-  def is_empty?
-    length == 0
+  def empty?
+    length.zero?
   end
 
   def re_hash
-    return if is_empty?
+    return if empty?
 
     new_hash = HashMap.new(capacity * 2)
-    entries.each do | ky, val |
+    entries.each do |ky, val|
       new_hash.set(ky, val)
     end
     new_hash
