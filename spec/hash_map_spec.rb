@@ -102,7 +102,7 @@ RSpec.describe HashMap do
 
     it 'remove all of them.' do
       subject.clear
-      expect(subject.is_empty?).to be(true)
+      should be_empty
     end
   end
 
@@ -129,7 +129,7 @@ RSpec.describe HashMap do
       subject.set('banana', 'yellow')
       subject.set('apple', 'red')
       subject.set('bird', 'blue')
-      expect(subject.entries.sort).to eq([['banana', 'yellow'], ['apple', 'red'], ['bird', 'blue']].sort)
+      expect(subject.entries.sort).to eq([%w[banana yellow], %w[apple red], %w[bird blue]].sort)
     end
   end
 
@@ -139,7 +139,7 @@ RSpec.describe HashMap do
       h_map.set('cat', 'gray')
       h_map.set('apple', 'red')
       expect(h_map.growth).to be(true)
-    end 
+    end
 
     it 'load factor below 0.75' do
       expect(subject.growth).to be(false)
@@ -147,13 +147,24 @@ RSpec.describe HashMap do
   end
 
   context '#re_hash' do
-    xit 'Its capacity must be double the current one' do
-      new_hash = subject.re_hash
-      expect(new_hash.buckets.count.nil).to eq(32)
+    it 'returns a new HashMap instance' do
+      subject.set('key', 'value')
+      expect(subject.re_hash).to be_a(HashMap)
+      expect(subject.re_hash).not_to be(subject)
     end
 
-    xit 'when the load factor reaches its maximum' do
-      expect(subject.buckets.length).to eq(16)
+    it 'doubles the capacity after rehashing' do
+      subject.set('key', 'value')
+      new_hash = subject.re_hash
+      expect(new_hash.capacity).to eq(subject.capacity * 2)
+    end
+
+    it 'transfers all key-value pairs to the new hash' do
+      subject.set('key', 'value')
+      subject.set('key1', 'value1')
+      new_hash = subject.re_hash
+      expect(new_hash.get('key')).to eq('value')
+      expect(new_hash.get('key1')).to eq('value1')
     end
   end
 end
