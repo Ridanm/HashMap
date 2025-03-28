@@ -13,7 +13,7 @@ class HashMap
     @buckets = Array.new(capacity)
   end
 
-  def hash(key, capacity = @capacity) 
+  def hash(key, capacity = @capacity)
     hash_code = 0
     prime = 31
     key.to_s.each_char { |char| hash_code = prime * hash_code + char.ord }
