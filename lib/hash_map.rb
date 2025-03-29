@@ -22,13 +22,13 @@ class HashMap
   end
 
   def set(key, value)
-    re_hash if growth
     @buckets[hash(key)] = LinkedList.new if @buckets[hash(key)].nil?
     if has?(key)
       update_key!(key, value)
     else
       @buckets[hash(key)].append([key, value])
     end
+    re_hash if growth
   end
 
   def get(key)
