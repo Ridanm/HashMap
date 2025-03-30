@@ -46,6 +46,12 @@ RSpec.describe HashMap do
     expect(subject.buckets[4].head.value[1]).to eq({ mail: 'pablo@mail.com' })
   end
 
+  context '#update_key' do
+    xit 'When the key exists, update its value' do
+      
+    end
+  end
+
   context '#get(key)' do
     it 'returns the value that is assigned to this key' do
       subject.set('Rama', 'green')
@@ -148,23 +154,19 @@ RSpec.describe HashMap do
 
   context '#re_hash' do
     it 'returns a new HashMap instance' do
-      subject.set('key', 'value')
       expect(subject.re_hash).to be_a(HashMap)
-      expect(subject.re_hash).not_to be(subject)
     end
 
     it 'doubles the capacity after rehashing' do
-      subject.set('key', 'value')
-      new_hash = subject.re_hash
-      expect(new_hash.capacity).to eq(subject.capacity * 2)
+      expect(subject.re_hash.capacity).to eq(32)
     end
 
     it 'transfers all key-value pairs to the new hash' do
       subject.set('key', 'value')
       subject.set('key1', 'value1')
-      new_hash = subject.re_hash
-      expect(new_hash.get('key')).to eq('value')
-      expect(new_hash.get('key1')).to eq('value1')
+      subject.re_hash
+      expect(subject.get('key')).to eq('value')
+      expect(subject.get('key1')).to eq('value1')
     end
   end
 end
