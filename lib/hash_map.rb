@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
-
 # This class implements a hash table
 class HashMap
   include UpdateData
@@ -61,7 +59,6 @@ class HashMap
 
     key_removed = nil
     current = @buckets[hash(key)].head
-
     until current.nil?
       return key_removed = current.value.first if current.next_node.nil?
 
@@ -77,13 +74,7 @@ class HashMap
     return if @buckets.nil?
 
     key_count = 0
-    active_lists.map do |list|
-      current = list.head
-      while current
-        key_count += 1 if current.value.first
-        current = current.next_node
-      end
-    end
+    each_node_value { |value| key_count += 1 if value.first }
     key_count
   end
 
@@ -95,13 +86,7 @@ class HashMap
     return if @buckets.empty?
 
     key_count = []
-    active_lists.map do |list|
-      current = list.head
-      while current
-        key_count.push(current.value.first)
-        current = current.next_node
-      end
-    end
+    each_node_value { |value| key_count.push(value.first) }
     key_count
   end
 
@@ -109,26 +94,13 @@ class HashMap
     return if @buckets.nil?
 
     existing_values = []
-    active_lists.map do |list|
-      current = list.head
-      while current
-        existing_values << current.value.last
-        current = current.next_node
-      end
-    end
+    each_node_value { |value| existing_values << value.last }
     existing_values
   end
 
   def entries
     key_value = []
-    active_lists.each do |list|
-      current = list.head
-      while current
-        key_value << current.value
-        current = current.next_node
-      end
-    end
-
+    each_node_value { |value| key_value << value }
     key_value
   end
 end
