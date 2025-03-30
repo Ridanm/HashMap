@@ -40,9 +40,7 @@ module UpdateData
   end
 
   def re_hash
-    return if empty?
-
-    new_hash = HashMap.new(capacity * 2)
+    new_hash = HashMap.new(@capacity * 2)
     entries.each do |ky, val|
       new_hash.set(ky, val)
     end
