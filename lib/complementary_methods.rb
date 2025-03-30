@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
-
 # This module has methods that interact with the HashMap class
 module UpdateData
   def index_error(bucket_index)
@@ -45,5 +43,17 @@ module UpdateData
       new_hash.set(ky, val)
     end
     new_hash
+  end
+
+  def each_node_value
+    return if @buckets.nil?
+
+    active_lists.each do |list|
+      current = list.head
+      while current
+        yield current.value if current.value
+        current = current.next_node
+      end
+    end
   end
 end
