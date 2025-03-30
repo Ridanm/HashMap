@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pry-byebug'
+
 # This class implements a hash table
 class HashMap
   include UpdateData
@@ -13,7 +15,7 @@ class HashMap
     @buckets = Array.new(capacity)
   end
 
-  def hash(key, capacity = @capacity)
+  def hash(key)
     hash_code = 0
     prime = 31
     key.to_s.each_char { |char| hash_code = prime * hash_code + char.ord }
@@ -28,7 +30,7 @@ class HashMap
     else
       @buckets[hash(key)].append([key, value])
     end
-    re_hash if growth
+    @buckets = re_hash.buckets if growth
   end
 
   def get(key)
