@@ -29,7 +29,26 @@ RSpec.describe HashMap do
     end
   end
 
+  context '#index_error' do
+    it 'when the key is less than zero' do
+      expect{subject.index_error(-2)}.to raise_error(IndexError) 
+    end
+
+    it 'when the key is greater than its current capacity' do
+      expect{subject.index_error(17)}.to raise_error(IndexError)
+    end
+  end
+
   context '#set(key, value)' do
+    it 'In an empty bucket' do
+      expect(subject.buckets[1]).to be_nil
+    end
+
+    it 'LinkedList is created, the head must be the key' do
+      subject.set('sky', 'blue')
+      expect(subject.buckets[1].head.value[0]).to eq('sky')
+    end
+
     it 'when we add key = banana and value = yellow' do
       subject.set('banana', 'yellow')
       expect(subject.buckets[5].head.value).to eq(%w[banana yellow])
@@ -46,9 +65,15 @@ RSpec.describe HashMap do
     expect(subject.buckets[4].head.value[1]).to eq({ mail: 'pablo@mail.com' })
   end
 
-  context '#update_key' do
-    xit 'When the key exists, update its value' do
-      
+  context '#update_key!' do
+    it 'When the key exists, update its value' do
+      subject.set('apple', 'red')
+      subject.set('apple', 'green')
+      expect(subject.get('apple')).to eq('green')
+    end
+
+    it 'when the key is not found in the hash table' do
+      expect(subject.has?('cat')).to be(false)
     end
   end
 
