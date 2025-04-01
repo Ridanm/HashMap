@@ -22,6 +22,7 @@ class HashMap
   end
 
   def set(key, value)
+    index_error(hash(key))
     @buckets[hash(key)] = LinkedList.new if @buckets[hash(key)].nil?
     if has?(key)
       update_key!(key, value)
