@@ -9,17 +9,7 @@ module UpdateData
   def update_key!(key, data)
     current = @buckets[hash(key)].head
     while current
-      if current.value.first == key
-        if data.is_a?(Hash)
-          current.value[1].merge!(data)
-        elsif data.is_a?(Array)
-          arr = current.value[1] << data
-          arr.flatten!.compact.uniq!
-        else
-          current.value[1] = data
-        end
-        return
-      end
+      return current.value[1] = data if current.value[0] == key
       current = current.next_node
     end
   end
