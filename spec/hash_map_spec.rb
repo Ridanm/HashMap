@@ -7,7 +7,6 @@ require './lib/hash_map'
 
 RSpec.describe HashMap do
   subject { HashMap.new(16, 0.75) }
-  let(:linked_list) { NodeLinkedList::LinkedList.new }
 
   context 'When creating an object of the HashMap class' do
     it 'If the capacity is 16' do
