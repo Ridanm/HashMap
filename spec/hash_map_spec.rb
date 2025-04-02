@@ -8,18 +8,18 @@ require './lib/hash_map'
 RSpec.describe HashMap do
   subject { HashMap.new(16, 0.75) }
 
-  context 'When creating an object of the HashMap class' do
-    it 'If the capacity is 16' do
+  context 'When creating an instance'do
+    it 'and its capacity is 16' do
       expect(subject.buckets.size).to eq(16)
     end
 
-    it 'Be an instance of Array' do
+    it 'must be an Array instanc6e' do
       expect(subject.buckets).to be_an_instance_of(Array)
     end
   end
 
   context '#hash(key)' do
-    it 'When key = Rama the returned number must be 3' do
+    it 'when key = Rama the returned number must be 3' do
       expect(subject.hash('Rama')).to eq(3)
     end
 
@@ -115,7 +115,7 @@ RSpec.describe HashMap do
       expect(subject.length).to be(0)
     end
 
-    it 'when the hash map has 2 elements' do
+    it 'when the hash map has 3 elements' do
       subject.set('banana', 'yellow')
       subject.set('apple', 'red')
       subject.set('watermelon', 'green')
@@ -185,7 +185,7 @@ RSpec.describe HashMap do
       expect(subject.re_hash.capacity).to eq(32)
     end
 
-    it 'transfers all key-value pairs to the new hash' do
+    it 'transfers all [key, value] pairs to the new hash' do
       subject.set('key', 'value')
       subject.set('key1', 'value1')
       subject.re_hash
