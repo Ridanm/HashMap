@@ -9,3 +9,5 @@ lib/.odin_main.rb.swp
 .rubocop.yalm
 .rspec
 .gitignore.swp
+lib/.hash_set.rb.swp
+spec/.hash_set_spec.rb.swp
