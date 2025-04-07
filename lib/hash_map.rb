@@ -58,17 +58,21 @@ class HashMap
   def remove(key)
     return if @buckets[hash(key)].nil?
 
-    key_removed = nil
     current = @buckets[hash(key)].head
-    until current.nil?
-      return key_removed = current.value.first if current.next_node.nil?
-
-      key_removed = current.next_node.value.first if current.value.first == key
-      current = current.next_node
+    previous = nil
+    if current.value[0] == key
+      @buckets[hash(key)].head = current.next_node
+      return current.value[1]
     end
 
-    @buckets[hash(key)] = current
-    key_removed
+    until current.nil?
+      if current.value.first == key
+        previous.next_node = current.next_node
+        return current.value[1]
+      end
+      previous = current
+      current = current.next_node
+    end
   end
 
   def length
