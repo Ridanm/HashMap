@@ -104,9 +104,24 @@ RSpec.describe HashMap do
       expect(subject.remove('Lola')).to be(nil)
     end
 
-    it 'when the key to be deleted is in the hash' do
+    it 'when the key to be deleted is apple' do
       subject.set('apple', 'red')
-      expect(subject.remove('apple')).to be('apple')
+      expect(subject.remove('apple')).to be('red')
+    end
+
+    it 'when the key to be removed is at the beginning of the list' do
+      subject.set('aa', 'red')
+      subject.set('bb', 'blue')
+      subject.remove('aa')
+      expect(subject.buckets[0].head.value).to eq(%w[bb blue])
+    end
+
+    it 'when the key is in the middle of the list' do
+      subject.set('aa', 'red')
+      subject.set('bb', 'blue')
+      subject.set('aba', 'yellow')
+      subject.remove('bb')
+      expect(subject.buckets[0].head.next_node.value).to eq(%w[aba yellow])
     end
   end
 
