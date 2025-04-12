@@ -4,8 +4,8 @@ lib/.data_structure_module.rb.swp
 lib/.hash_map.rb.swp
 lib/.main.rb.swp
 lib/.chaining.rb.swp
-lib/.complementary_methods.rb.swp
 lib/.odin_main.rb.swp
+lib/.complementary_methods.rb.swp
 .rubocop.yalm
 .rspec
 .gitignore.swp
