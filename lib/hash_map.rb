@@ -17,7 +17,7 @@ class HashMap
     hash_code = 0
     prime = 31
     key.to_s.each_char { |char| hash_code = prime * hash_code + char.ord }
-    bucket = (hash_code % self.capacity)
+    bucket = (hash_code % capacity)
     bucket.to_i
   end
 
