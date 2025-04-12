@@ -2,6 +2,7 @@
 
 # This module has methods that interact with the HashMap class
 module UpdateData
+
   def index_error(bucket_index)
     raise IndexError if bucket_index.negative? || bucket_index >= @capacity
   end
