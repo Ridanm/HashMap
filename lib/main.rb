@@ -65,7 +65,7 @@ hash_set.set('aba')
 #p hash_set.remove('bb')
 
 # HashSet entries
-puts "\nHashSet#entries =>  #{ hash_set.entries}"
+puts "\nHashSet#entries =>  #{ hash_set.entries.flatten}"
 # HashSet capacity
 puts "\nHashSet#capacity => #{hash_set.capacity}"
 
